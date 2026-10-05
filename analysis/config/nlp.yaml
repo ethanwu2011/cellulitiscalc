@@ -1,0 +1,33 @@
+# Laterality extraction config: retrieve short snippets, then a local LLM reads the snippets only.
+# PhysioNet data use agreement: local Ollama only (127.0.0.1). No note text leaves the machine.
+# Note: the snippet anchors actually used are the defaults in shared/nlp_engine/retrieval.py.
+
+model:
+  backend: ollama
+  name: qwen2.5:7b-instruct   # local open-weight model, about 4.7 GB
+  temperature: 0.0             # documentation only: temperature 0 and JSON output are set in shared/nlp_engine/extract.py
+  max_tokens: 512              # documentation only; not sent
+
+retrieval:                      # documentation only: anchors, window and cap used are in shared/nlp_engine/retrieval.py
+  note_type: discharge          # discharge summaries only for v1
+  section_anchors:              # regex/keyword anchors; the LLM never sees the full note
+    - "physical exam"
+    - "skin"
+    - "extremit"
+    - "impression"
+    - "assessment and plan"
+    - "consult"
+  window_chars: 1200            # chars of context around each anchor hit
+
+extraction_schema:             # documentation only: the prompt and schema used are in shared/nlp_engine/extract.py
+  fields:
+    - hadm_id
+    - laterality
+    - skin_findings            # {warmth, induration, fluctuance, purulence, bullae}
+    - consult_services_mentioned
+    - final_impression_label
+    - extraction_confidence
+    - source_sentence_span
+  laterality_values: [unilateral_left, unilateral_right, bilateral, not_documented]
+  impression_values: [cellulitis, stasis_dermatitis, dvt_suspected, gout, other_mimic, indeterminate]
+

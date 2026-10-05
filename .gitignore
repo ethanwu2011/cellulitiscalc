@@ -1,0 +1,24 @@
+# never commit data: PhysioNet data stay on credentialed machines
+data
+*.parquet
+*.jsonl
+*.npy
+*.npz
+*.pkl
+*.duckdb
+*.duckdb.wal
+*.db
+*.csv
+*.csv.gz
+# analysis outputs (aggregate, but can hold small cells; review before sharing)
+analysis/study2_cellulitis/*.json
+analysis/logs/
+*.log
+nohup.out
+# environments and caches
+.tmp/
+.venv/
+venv/
+__pycache__/
+node_modules/
+.DS_Store

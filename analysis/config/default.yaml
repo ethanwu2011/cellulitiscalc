@@ -1,0 +1,28 @@
+# Global config. No magic numbers elsewhere; they live here.
+seed: 20260707
+
+paths:
+  mimic_iv:   ~/mimiciv-3.1        # hosp/ + icu/ *.csv.gz
+  mimic_note: ~/mimic-iv-note-2.2  # note/discharge*, note/radiology*
+  eicu:       ~/eicu-crd-2.0       # not read by the code; the eICU path is set in external_eicu_v2.py
+  cache:      ./data/cache         # not read by the code
+
+duckdb:
+  threads: 8
+  memory_limit: 24GB
+  temp_directory: ./data/cache/duckdb_tmp
+  force_varchar:            # keep zero-padded/alphanumeric keys as VARCHAR (e.g. icd_code '0010')
+    - diagnoses_icd
+    - d_icd_diagnoses
+    - procedures_icd
+    - d_icd_procedures
+
+split:
+  unit: subject_id      # NEVER hadm_id
+  test_frac: 0.20
+  val_frac: 0.20
+  stratify_by: label
+
+dataset_framing: >
+  MIMIC-IV v3.1 + MIMIC-IV-Note v2.2. Single-center, retrospective,
+  Beth Israel Deaconess Medical Center EHR, 2008-2022.

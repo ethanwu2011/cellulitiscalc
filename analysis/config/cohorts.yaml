@@ -1,0 +1,39 @@
+# CELTIC cohort: cellulitis or erysipelas vs 18 coded pseudocellulitis conditions (MIMIC-IV v3.1 diagnoses_icd).
+# One index admission per patient; admissions coded for both a case and a mimic are excluded; split by subject_id.
+
+study2_cellulitis:
+
+  case:                              # POSITIVE class: cellulitis / erysipelas
+    label: cellulitis
+    icd9_prefix:  ["681", "682", "035"]
+    icd10_prefix: ["L03", "A46"]
+
+  mimics:                            # NEGATIVE class: pseudocellulitis spectrum
+    dvt_lower_limb:             {icd9_prefix: ["4534", "4535"], icd10_prefix: ["I824"]}
+    superficial_thrombophleb:   {icd9_prefix: ["4510", "4511", "4512", "4519"], icd10_prefix: ["I80"]}
+    chronic_venous_insuff:      {icd9: ["45981"], icd10_prefix: ["I872"]}
+    stasis_dermatitis:          {icd9: ["4541"], icd10_prefix: ["I831"]}
+    lymphedema:                 {icd9: ["4571"], icd10_prefix: ["I890", "Q820"]}
+    contact_dermatitis:         {icd9_prefix: ["692"], icd10_prefix: ["L23", "L24", "L25"]}
+    eczema_other_dermatitis:    {icd9_prefix: ["691", "6928"], icd10_prefix: ["L20", "L28", "L30"]}
+    gout_acute_lowerlimb:       {icd9: ["27401"], icd10_site_rule: "icd_code LIKE 'M10%' AND substr(icd_code,5,1) IN ('5','6','7')"}
+    pseudogout:                 {icd9: ["27549"], icd10_prefix: ["M11"]}
+    erythema_nodosum:           {icd9: ["6952"], icd10_prefix: ["L52"]}
+    panniculitis:               {icd9_prefix: ["72930", "7292"], icd10_prefix: ["M793"]}
+    cutaneous_vasculitis:       {icd9: ["4476"], icd10_prefix: ["L95", "I776"]}
+    pyoderma_gangrenosum:       {icd9: ["68601"], icd10_prefix: ["L88"]}
+    erythema_migrans:           {icd9: ["08881"], icd10_prefix: ["A692"]}
+    ruptured_baker_cyst:        {icd9: ["72751"], icd10_prefix: ["M660"]}
+    bursitis_lower_limb:        {icd9_prefix: ["7263", "7271", "7272"], icd10_prefix: ["M70", "M71"]}
+    insect_bite:                {icd9_prefix: ["9195", "9894"], icd10_prefix: ["T63"]}
+    contusion_hematoma_ll:      {icd9_prefix: ["924"], icd10_prefix: ["S800"]}
+
+  label_design:                      # documentation only; not read by the code
+    unit: "one index (earliest) admission per patient"
+    positive: "case code present AND no mimic code"
+    negative: "mimic code present AND no case code"
+    ambiguous_same_admission_both: "excluded"
+    result:
+      n_patients: 24852
+      cellulitis_prevalence: 0.474
+      splits: "60/20/20 patient-level, stratified by label, seed=20260707"

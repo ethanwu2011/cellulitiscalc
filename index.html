@@ -1,0 +1,143 @@
+<!doctype html>
+<!--
+The page is a bedside observation chart, not a form beside a result card. Each finding is one ruled row, the
+probability reads at the foot of the chart with its cut points printed on a scale, and the contribution bars are the
+model's own coefficients. One grid runs the whole sheet: a wide column for what you answer or read, a 320px column for
+numbers. One accent, CELTIC blue from the manuscript figures, and it only ever means "toward cellulitis".
+Arithmetic lives in js/model.js and is covered by tests/.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>CELTIC: cellulitis or a mimic</title>
+<meta name="description" content="CELTIC, an interpretable tiered score that separates cellulitis from its noninfectious mimics in hospitalized adults. Runs entirely in your browser.">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M6 24h20M6 8h20M6 16h12' stroke='%231F4E79' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#chart">Skip to the calculator</a>
+
+<header class="masthead">
+  <h1><span class="wordmark">CELTIC</span> <span class="expand">Cellulitis Tiered Interpretable Classifier</span></h1>
+  <p class="lede">Cellulitis or a noninfectious mimic, in a hospitalized adult with a red, warm, swollen limb.</p>
+  <p class="notice"><strong>Research use only</strong>, not yet validated for clinical decisions. Everything runs in your browser. Nothing you enter is sent, stored, or logged.</p>
+</header>
+
+<main id="chart" class="sheet">
+  <div class="tiers">
+    <div role="tablist" aria-label="Tier">
+      <button type="button" role="tab" id="tab-bedside" aria-selected="true" aria-controls="panel" data-tier="bedside"><span class="tier-name">Bedside</span> <span class="tier-meta"><span>5 findings</span> <span>AUROC 0.72</span></span></button>
+      <button type="button" role="tab" id="tab-rapid" aria-selected="false" aria-controls="panel" data-tier="rapid" tabindex="-1"><span class="tier-name">Rapid</span> <span class="tier-meta"><span>10 findings</span> <span>AUROC 0.73</span></span></button>
+      <button type="button" role="tab" id="tab-standard" aria-selected="false" aria-disabled="true" aria-describedby="tiers-ehr" disabled><span class="tier-name">Standard</span> <span class="tier-meta"><span>37 predictors</span> <span>AUROC 0.75</span></span></button>
+      <button type="button" role="tab" id="tab-comprehensive" aria-selected="false" aria-disabled="true" aria-describedby="tiers-ehr" disabled><span class="tier-name">Comprehensive</span> <span class="tier-meta"><span>94 predictors</span> <span>AUROC 0.76</span></span></button>
+    </div>
+    <p class="tiers-note"><span>You do not need every answer: the score reads from the first one, and anything left blank counts as no, as missing values did in the study. Rapid adds five findings once the first labs return.</span> <span id="tiers-ehr">Standard and Comprehensive read the electronic record automatically, so there is nothing to enter by hand.</span></p>
+  </div>
+
+  <div class="columns">
+    <section class="findings" aria-labelledby="findings-h">
+      <h2 id="findings-h" class="rowhead rowhead-grid"><span>Finding</span> <span>Answer</span></h2>
+      <div id="panel" role="tabpanel" aria-labelledby="tab-bedside" class="rows"></div>
+      <div class="rows-foot">
+        <p class="incomplete" id="incomplete" aria-live="polite"></p>
+        <button type="button" class="plain" id="clear">Clear answers</button>
+      </div>
+    </section>
+
+    <section class="result is-empty" id="result" aria-labelledby="total-h">
+      <h2 id="total-h" class="rowhead">Probability of cellulitis</h2>
+      <div class="total" id="total" aria-live="polite" aria-atomic="true">
+        <p class="prob"><span class="prob-n" id="prob">&nbsp;</span><span class="prob-unit" id="prob-unit"></span></p>
+        <p class="band" id="band">Answer what you know. The score reads from the first answer.</p>
+        <p class="band-note" id="band-note"></p>
+      </div>
+      <div class="scale" id="scale" aria-hidden="true">
+        <div class="scale-row scale-names"><span>Rule-out</span><span>Indeterminate</span><span>Rule-in</span></div>
+        <div class="scale-row scale-track"><span class="zone zone-out"></span><span class="zone zone-mid"></span><span class="zone zone-in"></span><span class="scale-mark" id="mark"></span></div>
+        <div class="scale-row scale-ticks"><span></span><span>30%</span><span>65%</span></div>
+      </div>
+      <p class="thresholds">Rule-out below 30%. Rule-in at 65% or above. Both cut points were fixed before evaluation. <span id="tier-auroc"></span></p>
+
+      <h2 class="rowhead contrib-h"><span>What moved it</span> <span class="rowhead-meta">log-odds, largest first</span></h2>
+      <p class="contrib-lede">Each bar is that finding's coefficient. Right of the line favors cellulitis, left favors a mimic.</p>
+      <ol class="contrib" id="contrib" aria-label="Contribution of each finding"></ol>
+      <p class="absent" id="absent"></p>
+      <p class="hand" id="hand"></p>
+    </section>
+  </div>
+</main>
+
+<section class="about" aria-labelledby="about-h">
+  <h2 id="about-h">About CELTIC</h2>
+  <p class="about-lead">Every tier is logistic regression. The coefficients on this page are the model.</p>
+
+  <div class="about-cols">
+    <div class="about-words">
+      <h3>Use it for</h3>
+      <p>A hospitalized adult with a red, warm, swollen limb, as a transparent estimate to set beside your examination.</p>
+      <h3>Do not use it for</h3>
+      <p>Children, outpatients, an obvious alternative diagnosis, necrotizing infection, or sepsis. It does not replace the examination, an ultrasound for suspected clot, or a dermatology consult. Never withhold antibiotics from an unstable patient because of it.</p>
+      <h3>Limits</h3>
+      <p>The reference standard was the coded discharge diagnosis, not expert adjudication. Discrimination was lowest at 70 years or older (0.70), where a mimic is most likely, so look twice at a rule-in in that group. No tier uses a culture result.</p>
+      <h3 id="trained-h">Trained on</h3>
+      <dl class="kv" aria-labelledby="trained-h">
+        <div><dt>Patients</dt><dd>24&nbsp;852 adults, one index admission each</dd></div>
+        <div><dt>Hospital</dt><dd>Beth Israel Deaconess, 2008 to 2022 (MIMIC-IV v3.1)</dd></div>
+        <div><dt>Cellulitis or erysipelas</dt><dd>47.4%</dd></div>
+        <div><dt>Mimics</dt><dd>18 pseudocellulitis conditions, such as deep vein thrombosis, venous stasis, contact dermatitis, gout</dd></div>
+        <div><dt>Laterality</dt><dd>Read from 17&nbsp;024 discharge summaries by a language model on local hardware</dd></div>
+      </dl>
+
+    </div>
+
+    <div class="about-numbers">
+      <h3 id="tested-h">Tested on</h3>
+      <table class="auc" aria-labelledby="tested-h">
+        <thead>
+          <tr><th scope="col">AUROC</th><th scope="col" class="n is-celtic">CELTIC</th><th scope="col" class="n is-alt">Complete ALT-70</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Held-out fifth, Bedside tier <span class="sub">3446 with a processed note, 45.4% cellulitis</span></th><td class="n is-celtic">0.72 <span class="sub">0.70 to 0.74</span></td><td class="n is-alt">0.60 <span class="sub">0.59 to 0.62</span></td></tr>
+          <tr><th scope="row">Other hospitals <span class="sub">eICU-CRD, 2536 patients, structured version</span></th><td class="n is-celtic">0.69</td><td class="n is-alt">0.54</td></tr>
+          <tr><th scope="row">Emergency department <span class="sub">3314 patients, no examination finding available</span></th><td class="n is-celtic">0.56</td><td class="n is-alt">0.52</td></tr>
+        </tbody>
+      </table>
+      <dl class="kv kv-after">
+        <div><dt>Paired difference</dt><dd>+0.12 (0.10 to 0.14), P &lt; .001, same held-out patients</dd></div>
+        <div><dt>Other tiers</dt><dd>Rapid 0.73, Standard 0.75, Comprehensive 0.76</dd></div>
+        <div><dt>Calibration</dt><dd>Slope 1.00, intercept &minus;0.01</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="caution">
+    <p><strong>Research use only.</strong> This calculator accompanies a manuscript under review and has not been validated prospectively. It is for research and education. The authors accept no responsibility for clinical decisions made with it.</p>
+  </div>
+
+  <details class="worked">
+    <summary>The arithmetic, worked by hand</summary>
+    <div class="worked-body">
+      <p class="math">logit = &minus;1.076 + 1.530&middot;unilateral + 0.187&middot;leukocytosis &minus; 0.654&middot;age&nbsp;&ge;&nbsp;70 &minus; 0.562&middot;malignancy + 0.399&middot;diabetes<br>probability = 1 / (1 + e<sup>&minus;logit</sup>)</p>
+      <p>Example: unilateral involvement, diabetes, age 74, no leukocytosis, no malignancy.</p>
+      <p class="math">logit = &minus;1.076 + 1.530 + 0.399 &minus; 0.654 = 0.199<br>e<sup>&minus;0.199</sup> = 0.820<br>probability = 1 / 1.820 = 0.549, shown as 55%, indeterminate</p>
+      <p>Hand score: unilateral +3, diabetes +1, leukocytosis 0, age 70 or older &minus;1, active malignancy &minus;1. This patient totals +3 + 1 &minus; 1 = +3. In the test set, 60% of patients with a hand score of +3 had cellulitis.</p>
+      <p>The Rapid tier has the same form with 10 coefficients, printed in the source.</p>
+    </div>
+  </details>
+
+  <h3>Cite</h3>
+  <p class="cite-text" id="citation">Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC, a tiered interpretable model to distinguish cellulitis from mimics in hospitalized adults. JAMA Dermatol. 2026; submitted. cellulitiscalc.com</p>
+  <p class="cite-act"><button type="button" class="plain" id="copy-cite">Copy citation</button><span class="copied" id="copied" aria-live="polite"></span></p>
+</section>
+
+<footer class="foot">
+  <p>Source, tests and analysis code at <a href="https://github.com/ethanwu2011/cellulitiscalc">github.com/ethanwu2011/cellulitiscalc</a>. Coefficients come from the analysis code in that repository (seed 20260707); it holds no patient data. No server, no analytics, no cookies. Fonts are self-hosted.</p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

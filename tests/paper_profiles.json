@@ -1,0 +1,302 @@
+[
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 25.4,
+  "n": 341,
+  "observed_pct": 22.9
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 33.7,
+  "n": 94,
+  "observed_pct": 37.2
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 16.3,
+  "n": 48,
+  "observed_pct": 22.9
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 15.1,
+  "n": 203,
+  "observed_pct": 14.3
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 20.9,
+  "n": 91,
+  "observed_pct": 14.3
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 9.2,
+  "n": 36,
+  "observed_pct": 19.4
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 29.1,
+  "n": 143,
+  "observed_pct": 31.5
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 38.0,
+  "n": 55,
+  "observed_pct": 29.1
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 19.0,
+  "n": 24,
+  "observed_pct": 29.2
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 17.6,
+  "n": 100,
+  "observed_pct": 15.0
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 24.1,
+  "n": 40,
+  "observed_pct": 22.5
+ },
+ {
+  "answers": {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 10.9,
+  "n": 21,
+  "observed_pct": 19.0
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 61.2,
+  "n": 641,
+  "observed_pct": 62.4
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 70.1,
+  "n": 262,
+  "observed_pct": 74.0
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 47.3,
+  "n": 64,
+  "observed_pct": 34.4
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 1
+  },
+  "expected_pct": 57.2,
+  "n": 22,
+  "observed_pct": 50.0
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 45.0,
+  "n": 300,
+  "observed_pct": 49.3
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 54.9,
+  "n": 163,
+  "observed_pct": 52.1
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 31.8,
+  "n": 52,
+  "observed_pct": 42.3
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 65.5,
+  "n": 278,
+  "observed_pct": 60.4
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 73.9,
+  "n": 121,
+  "observed_pct": 73.6
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 52.0,
+  "n": 26,
+  "observed_pct": 30.8
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0
+  },
+  "expected_pct": 49.7,
+  "n": 141,
+  "observed_pct": 47.5
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1
+  },
+  "expected_pct": 59.5,
+  "n": 86,
+  "observed_pct": 60.5
+ },
+ {
+  "answers": {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0
+  },
+  "expected_pct": 36.0,
+  "n": 23,
+  "observed_pct": 39.1
+ }
+]

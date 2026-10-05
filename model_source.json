@@ -1,0 +1,537 @@
+{
+ "bedside": {
+  "intercept": -1.0763,
+  "terms": {
+   "asymmetry": {
+    "coef": 1.5301,
+    "or": 4.62,
+    "or_lo": 4.26,
+    "or_hi": 5.0,
+    "points": 3
+   },
+   "leuko": {
+    "coef": 0.187,
+    "or": 1.21,
+    "or_lo": 1.11,
+    "or_hi": 1.3,
+    "points": 0
+   },
+   "age70": {
+    "coef": -0.6539,
+    "or": 0.52,
+    "or_lo": 0.48,
+    "or_hi": 0.56,
+    "points": -1
+   },
+   "como_malignancy_active": {
+    "coef": -0.5615,
+    "or": 0.57,
+    "or_lo": 0.5,
+    "or_hi": 0.65,
+    "points": -1
+   },
+   "como_diabetes": {
+    "coef": 0.3985,
+    "or": 1.49,
+    "or_lo": 1.37,
+    "or_hi": 1.61,
+    "points": 1
+   }
+  },
+  "auroc": {
+   "auroc": 0.721,
+   "lo": 0.704,
+   "hi": 0.737,
+   "n": 3446,
+   "n_pos": 1566
+  }
+ },
+ "rapid": {
+  "intercept": -1.0731,
+  "terms": {
+   "asymmetry": {
+    "coef": 1.5058,
+    "or": 4.51,
+    "or_lo": 4.16,
+    "or_hi": 4.89
+   },
+   "leuko": {
+    "coef": 0.1629,
+    "or": 1.18,
+    "or_lo": 1.09,
+    "or_hi": 1.27
+   },
+   "age70": {
+    "coef": -0.5977,
+    "or": 0.55,
+    "or_lo": 0.51,
+    "or_hi": 0.6
+   },
+   "como_malignancy_active": {
+    "coef": -0.616,
+    "or": 0.54,
+    "or_lo": 0.48,
+    "or_hi": 0.61
+   },
+   "como_diabetes": {
+    "coef": 0.4874,
+    "or": 1.63,
+    "or_lo": 1.5,
+    "or_hi": 1.77
+   },
+   "crp_hi": {
+    "coef": 0.4688,
+    "or": 1.6,
+    "or_lo": 1.33,
+    "or_hi": 1.93
+   },
+   "neut_hi": {
+    "coef": 0.2157,
+    "or": 1.24,
+    "or_lo": 1.14,
+    "or_hi": 1.35
+   },
+   "como_chf": {
+    "coef": -0.2884,
+    "or": 0.75,
+    "or_lo": 0.67,
+    "or_hi": 0.83
+   },
+   "como_ckd": {
+    "coef": -0.0768,
+    "or": 0.93,
+    "or_lo": 0.84,
+    "or_hi": 1.03
+   },
+   "como_obesity": {
+    "coef": -0.2828,
+    "or": 0.75,
+    "or_lo": 0.67,
+    "or_hi": 0.84
+   }
+  },
+  "auroc": {
+   "auroc": 0.727,
+   "lo": 0.711,
+   "hi": 0.744,
+   "n": 3446,
+   "n_pos": 1566
+  }
+ },
+ "standard": {
+  "n": 37,
+  "auroc": {
+   "auroc": 0.747,
+   "lo": 0.73,
+   "hi": 0.763,
+   "n": 3446,
+   "n_pos": 1566
+  }
+ },
+ "comprehensive": {
+  "n": 94,
+  "auroc": {
+   "auroc": 0.756,
+   "lo": 0.74,
+   "hi": 0.774,
+   "n": 3446,
+   "n_pos": 1566
+  }
+ },
+ "alt70_complete": {
+  "auroc": 0.604,
+  "lo": 0.587,
+  "hi": 0.622,
+  "n": 3446,
+  "n_pos": 1566
+ },
+ "paired": {
+  "delta": 0.116,
+  "lo": 0.097,
+  "hi": 0.135,
+  "p_boot": 0.0005,
+  "delong": {
+   "auc1": 0.721,
+   "auc2": 0.604,
+   "delta": 0.116,
+   "z": 11.85,
+   "p_delong": "<0.0001"
+  }
+ },
+ "bands": {
+  "rule_out_below": 0.3,
+  "rule_in_at_or_above": 0.65
+ },
+ "band_yield": {
+  "rule_out": {
+   "n": 1085,
+   "pct_of_cohort": 31.5,
+   "pct_pseudocellulitis": 79.5,
+   "pct_cellulitis": 20.5,
+   "LR": 0.31
+  },
+  "indeterminate": {
+   "n": 1700,
+   "pct_of_cohort": 49.3,
+   "pct_cellulitis": 52.5
+  },
+  "rule_in": {
+   "n": 661,
+   "pct_of_cohort": 19.2,
+   "pct_cellulitis": 68.2,
+   "LR": 2.58
+  },
+  "pct_actionable": 50.7
+ },
+ "cohort": {
+  "n": 24852,
+  "n_note": 17024,
+  "n_test": 3446,
+  "prev_test": 0.454,
+  "cellulitis": 11788,
+  "mimic": 13064
+ },
+ "eicu": {
+  "celtic": {
+   "auroc": 0.69,
+   "lo": 0.662,
+   "hi": 0.717,
+   "n": 2536,
+   "n_pos": 2094
+  },
+  "alt70": {
+   "auroc": 0.54,
+   "lo": 0.513,
+   "hi": 0.567,
+   "n": 2536,
+   "n_pos": 2094
+  },
+  "n": 2536
+ },
+ "ed": {
+  "celtic": {
+   "auroc": 0.563,
+   "lo": 0.543,
+   "hi": 0.583,
+   "n": 3314,
+   "n_pos": 2331
+  },
+  "alt70": {
+   "auroc": 0.517,
+   "lo": 0.497,
+   "hi": 0.538,
+   "n": 3314,
+   "n_pos": 2331
+  },
+  "n": 3314
+ },
+ "profiles_test": [
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 341,
+   "obs_pct": 22.9,
+   "pred_pct": 25.4
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 94,
+   "obs_pct": 37.2,
+   "pred_pct": 33.7
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 48,
+   "obs_pct": 22.9,
+   "pred_pct": 16.3
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 203,
+   "obs_pct": 14.3,
+   "pred_pct": 15.1
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 91,
+   "obs_pct": 14.3,
+   "pred_pct": 20.9
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 36,
+   "obs_pct": 19.4,
+   "pred_pct": 9.2
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 143,
+   "obs_pct": 31.5,
+   "pred_pct": 29.1
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 55,
+   "obs_pct": 29.1,
+   "pred_pct": 38.0
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 24,
+   "obs_pct": 29.2,
+   "pred_pct": 19.0
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 100,
+   "obs_pct": 15.0,
+   "pred_pct": 17.6
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 40,
+   "obs_pct": 22.5,
+   "pred_pct": 24.1
+  },
+  {
+   "asymmetry": 0,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 21,
+   "obs_pct": 19.0,
+   "pred_pct": 10.9
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 641,
+   "obs_pct": 62.4,
+   "pred_pct": 61.2
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 262,
+   "obs_pct": 74.0,
+   "pred_pct": 70.1
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 64,
+   "obs_pct": 34.4,
+   "pred_pct": 47.3
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 1,
+   "n": 22,
+   "obs_pct": 50.0,
+   "pred_pct": 57.2
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 300,
+   "obs_pct": 49.3,
+   "pred_pct": 45.0
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 163,
+   "obs_pct": 52.1,
+   "pred_pct": 54.9
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 0,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 52,
+   "obs_pct": 42.3,
+   "pred_pct": 31.8
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 278,
+   "obs_pct": 60.4,
+   "pred_pct": 65.5
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 121,
+   "obs_pct": 73.6,
+   "pred_pct": 73.9
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 0,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 26,
+   "obs_pct": 30.8,
+   "pred_pct": 52.0
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 0,
+   "n": 141,
+   "obs_pct": 47.5,
+   "pred_pct": 49.7
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 0,
+   "como_diabetes": 1,
+   "n": 86,
+   "obs_pct": 60.5,
+   "pred_pct": 59.5
+  },
+  {
+   "asymmetry": 1,
+   "leuko": 1,
+   "age70": 1,
+   "como_malignancy_active": 1,
+   "como_diabetes": 0,
+   "n": 23,
+   "obs_pct": 39.1,
+   "pred_pct": 36.0
+  }
+ ],
+ "points_to_obs": {
+  "-2": {
+   "n": 57,
+   "obs_pct_cellulitis": 19.3,
+   "mean_prob": 0.098
+  },
+  "-1": {
+   "n": 395,
+   "obs_pct_cellulitis": 15.9,
+   "mean_prob": 0.16
+  },
+  "0": {
+   "n": 633,
+   "obs_pct_cellulitis": 23.4,
+   "mean_prob": 0.255
+  },
+  "1": {
+   "n": 224,
+   "obs_pct_cellulitis": 36.6,
+   "mean_prob": 0.345
+  },
+  "2": {
+   "n": 556,
+   "obs_pct_cellulitis": 46.2,
+   "mean_prob": 0.467
+  },
+  "3": {
+   "n": 1198,
+   "obs_pct_cellulitis": 60.3,
+   "mean_prob": 0.611
+  },
+  "4": {
+   "n": 383,
+   "obs_pct_cellulitis": 73.9,
+   "mean_prob": 0.713
+  }
+ },
+ "calibration": {
+  "bedside": {
+   "brier": 0.211,
+   "slope": 1.0,
+   "intercept": -0.009
+  },
+  "comprehensive": {
+   "brier": 0.2001,
+   "slope": 0.984,
+   "intercept": -0.02
+  }
+ },
+ "subgroup_age70": {
+  "auroc": 0.702,
+  "lo": 0.672,
+  "hi": 0.73,
+  "n": 1236,
+  "n_pos": 453,
+  "prevalence": 0.367
+ }
+}

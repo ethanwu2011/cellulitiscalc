@@ -1,0 +1,62 @@
+# Feature config. Config-driven: no code lists / thresholds hardcoded in .py.
+# Data framing: MIMIC-IV v3.1, single-center, retrospective, BIDMC, 2008-2022.
+
+lab_window_hours: 48        # first-N-hours from admittime (at-presentation, avoids treatment leakage)
+
+# labevents itemids (hospital-wide coverage). Primary itemid per analyte + fallbacks.
+labs:
+  wbc:         [51301, 51300]   # White Blood Cells, K/uL  (ALT-70 leukocytosis)
+  hemoglobin:  [51222, 50811]
+  platelet:    [51265]
+  creatinine:  [50912]
+  sodium:      [50983]
+  bicarbonate: [50882]
+  crp:         [50889]          # C-reactive protein (sparse; coverage measured at build)
+  lactate:     [50813]
+  neutrophils_abs: [52075, 51256]
+  eosinophils_abs: [52073]  # full CBC differential
+  lymphocytes_abs: [51133]
+  monocytes_abs:   [52074]
+  bands:           [51144]
+  rdw:             [51277]
+  mcv:             [51250]
+  # discriminating chemistry / inflammatory / organ markers (objective, at-presentation)
+  d_dimer:         [51196, 50915]   # D-dimer; elevated values favor deep vein thrombosis
+  esr:             [51288]          # sedimentation rate; inflammation -> cellulitis
+  albumin:         [50862]
+  alt:             [50861]
+  ast:             [50878]
+  alk_phos:        [50863]
+  bilirubin:       [50885]
+  ck:              [50910]          # creatine kinase; muscle involvement / nec fasc
+  glucose:         [50931]
+  troponin:        [51003]
+
+# ICU-only vitals (chartevents). Missing for non-ICU patients -> missingness indicator kept.
+vitals_icu:
+  heart_rate: [220045]
+  temp_c:     [223762]
+  temp_f:     [223761]
+  resp_rate:  [220210]
+  spo2:       [220277]
+  sysbp:      [220179]
+
+# Comorbidity flags from diagnoses_icd on the index admission.
+# DELIBERATELY EXCLUDES the label-defining families (venous insufficiency 454/I83, DVT
+# 453/I82, gout 274/M10, cellulitis 681/682/L03) to avoid circular/leaky predictors.
+comorbidities:
+  diabetes:          {icd9_prefix: ["250"],        icd10_prefix: ["E10","E11","E13"]}
+  chf:               {icd9_prefix: ["428"],        icd10_prefix: ["I50"]}
+  ckd:               {icd9_prefix: ["585"],        icd10_prefix: ["N18"]}
+  obesity:           {icd9_prefix: ["2780"],       icd10_prefix: ["E66"]}
+  liver_disease:     {icd9_prefix: ["571"],        icd10_prefix: ["K70","K74"]}
+  hiv:               {icd9_prefix: ["042"],        icd10_prefix: ["B20"]}
+  transplant:        {icd9_prefix: ["V42","996.8"],icd10_prefix: ["Z94","T86"]}
+  malignancy_active: {icd9_prefix: ["140","141","150","151","162","174","185","200","201","202","203","204","205"], icd10_prefix: ["C"]}
+
+# ALT-70 score (Raff et al.). Asymmetry is note-derived -> filled by the laterality extraction.
+alt70:
+  leukocytosis_wbc: 10.0   # WBC >= 10 K/uL -> 1 pt
+  tachycardia_hr:   90     # HR  >= 90 bpm  -> 1 pt (ICU-only in MIMIC-IV chartevents; the ED analysis uses triage heart rate)
+  age_threshold:    70     # Age >= 70      -> 2 pts
+  points: {asymmetry: 3, leukocytosis: 1, tachycardia: 1, age: 2}

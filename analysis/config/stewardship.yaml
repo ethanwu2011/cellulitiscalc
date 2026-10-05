@@ -1,0 +1,34 @@
+# Antibiotic stewardship: systemic antibiotic name patterns (lowercased LIKE substrings).
+# Days-of-therapy (DOT) = sum over antibiotic orders of (stop_day - start_day + 1).
+# Antibiotics given to pseudocellulitis (mimic) patients are counted as potentially unnecessary exposure.
+
+antibiotics:
+  - vancomycin
+  - cefazolin
+  - cephalexin
+  - cefepime
+  - ceftriaxone
+  - ceftaroline
+  - cefadroxil
+  - piperacillin
+  - tazobactam
+  - clindamycin
+  - doxycycline
+  - linezolid
+  - daptomycin
+  - ampicillin
+  - amoxicillin
+  - nafcillin
+  - oxacillin
+  - dicloxacillin
+  - trimethoprim
+  - sulfamethoxazole
+  - metronidazole
+  - levofloxacin
+  - ciprofloxacin
+  - meropenem
+  - ertapenem
+  - aztreonam
+  - gentamicin
+  - tobramycin
+  - minocycline
