@@ -45,8 +45,7 @@ Any static host works. On Vercel: import the repository, framework preset "Other
 
 ## Cite
 
-Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC, a tiered interpretable model to distinguish
-cellulitis from mimics in hospitalized adults. Submitted to JAMA Dermatology, 2026.
+Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC: A Tiered Model to Distinguish Lower Extremity Cellulitis From Mimics in Hospitalized Adults. Submitted to JAMA Dermatology, 2026.
 
 ## License
 

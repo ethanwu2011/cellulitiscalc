@@ -1,6 +1,6 @@
 # CELTIC analysis code
 
-This folder holds the code that produced the numbers in the CELTIC paper: Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC, a tiered interpretable model to distinguish cellulitis from mimics in hospitalized adults. Submitted to JAMA Dermatology, 2026.
+This folder holds the code that produced the numbers in the CELTIC paper: Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC: A Tiered Model to Distinguish Lower Extremity Cellulitis From Mimics in Hospitalized Adults. Submitted to JAMA Dermatology, 2026.
 
 The code builds a cohort of hospitalized adults coded for cellulitis or for one of 18 pseudocellulitis conditions, reads limb laterality from the discharge summary with a local language model, fits the four CELTIC tiers (Bedside, Rapid, Standard, Comprehensive), and compares them with the ALT-70 in MIMIC-IV inpatients. It then compares structured versions of the model with the ALT-70 in MIMIC-IV-ED and in eICU-CRD. No tier uses a culture result, and no code here reads one. No patient data are in this repository. The browser calculator in the parent folder does not need this code to run.
 
@@ -105,7 +105,7 @@ PYTHONPATH=. python study2_cellulitis/celtic_noculture_ed3.py        # why discr
 | 3 | `data/nlp/cohort_extractions.jsonl` | Row-level | per admission: laterality, impression label, confidence, skin findings, consults, `ok`; no note text |
 | 4 | `study2_cellulitis/celtic_noculture_metrics.json` | Aggregate | every model result, interval, band and operating point |
 | 4 | `study2_cellulitis/celtic_table1.json` | Aggregate | Table 1 |
-| 5 | `study2_cellulitis/celtic_noculture_metrics.json` | Aggregate | adds `band_counts`, `ed.bedside_items`, `ed.bedside_items_plus_vitals`, `ed.comorbidity_prevalence_pct`, `ed.decomposition`, `ed.admitted_like_for_like` |
+| 5 | `study2_cellulitis/celtic_noculture_metrics.json` | Aggregate | adds `band_counts`, `ed.bedside_items`, `ed.bedside_items_plus_vitals`, `ed.comorbidity_prevalence_pct`, `ed.admitted_like_for_like` |
 
 The results file can contain `NaN` values, which Python's `json` module reads and JavaScript's `JSON.parse` does not.
 
@@ -132,8 +132,6 @@ P values for AUROC differences are from the DeLong test (`delong` fields). The o
 
 From this folder, steps 1, 2, 4 and 5 were rerun against the PhysioNet files with the laterality output of step 3 reused, and the output was compared with the run reported in the paper (16 September 2026). The cohort table came out identical, the feature table identical in every column it contains, and every inpatient number was reproduced exactly, including Table 1. Emergency department and eICU AUROCs, AUROC differences and DeLong P values were also identical. Their bootstrap intervals can move in the third decimal between runs, because those tables come back from DuckDB in no fixed row order and the bootstrap resamples by position. Separately, each eICU patient's index stay is chosen by admission offset with no tie-breaker, so a patient with two stays at the same offset can be represented by a different stay; between runs this moved one eICU operating point by one patient (sensitivity 53.9% in the paper, 54.0% on a rerun), while the eICU AUROCs, stored at two decimals, did not change.
 
-The original working copy also computed culture flags and a few culture-based comparison models for internal checks. None is reported in the paper, none enters any CELTIC tier, and they are left out of this release; removing them changed no reported number. The paper's results file therefore has a few extra culture keys under `ed.decomposition`, where this code writes `structured_4` for the model that file calls `structured_4_no_culture`.
-
 ## Fixed settings
 
 | Setting | Value | Where |
@@ -157,4 +155,4 @@ The PhysioNet data use agreements limit what can leave your machine. The lateral
 
 ## License and citation
 
-MIT (see `../LICENSE`). Cite as: Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC, a tiered interpretable model to distinguish cellulitis from mimics in hospitalized adults. Submitted to JAMA Dermatology, 2026.
+MIT (see `../LICENSE`). Cite as: Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC: A Tiered Model to Distinguish Lower Extremity Cellulitis From Mimics in Hospitalized Adults. Submitted to JAMA Dermatology, 2026.

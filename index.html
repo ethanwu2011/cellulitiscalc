@@ -35,7 +35,7 @@ Arithmetic lives in js/model.js and is covered by tests/.
       <button type="button" role="tab" id="tab-standard" aria-selected="false" aria-disabled="true" aria-describedby="tiers-ehr" disabled><span class="tier-name">Standard</span> <span class="tier-meta"><span>37 predictors</span> <span>AUROC 0.75</span></span></button>
       <button type="button" role="tab" id="tab-comprehensive" aria-selected="false" aria-disabled="true" aria-describedby="tiers-ehr" disabled><span class="tier-name">Comprehensive</span> <span class="tier-meta"><span>94 predictors</span> <span>AUROC 0.76</span></span></button>
     </div>
-    <p class="tiers-note"><span>You do not need every answer: the score reads from the first one, and anything left blank counts as no, as missing values did in the study. Rapid adds five findings once the first labs return.</span> <span id="tiers-ehr">Standard and Comprehensive read the electronic record automatically, so there is nothing to enter by hand.</span></p>
+    <p class="tiers-note"><span>You do not need every answer: the score reads from the first one, and anything left blank counts as no, as missing values did in the study. Bedside includes the first white blood cell count; Rapid adds five findings from the chart and the first laboratory results.</span> <span id="tiers-ehr">Standard and Comprehensive read the electronic record automatically, so there is nothing to enter by hand.</span></p>
   </div>
 
   <div class="columns">
@@ -60,7 +60,7 @@ Arithmetic lives in js/model.js and is covered by tests/.
         <div class="scale-row scale-track"><span class="zone zone-out"></span><span class="zone zone-mid"></span><span class="zone zone-in"></span><span class="scale-mark" id="mark"></span></div>
         <div class="scale-row scale-ticks"><span></span><span>30%</span><span>65%</span></div>
       </div>
-      <p class="thresholds">Rule-out below 30%. Rule-in at 65% or above. Both cut points were fixed before evaluation. <span id="tier-auroc"></span></p>
+      <p class="thresholds">Rule-out below 30%. Rule-in at 65% or above. <span id="tier-auroc"></span></p>
 
       <h2 class="rowhead contrib-h"><span>What moved it</span> <span class="rowhead-meta">log-odds, largest first</span></h2>
       <p class="contrib-lede">Each bar is that finding's coefficient. Right of the line favors cellulitis, left favors a mimic.</p>
@@ -82,14 +82,14 @@ Arithmetic lives in js/model.js and is covered by tests/.
       <h3>Do not use it for</h3>
       <p>Children, outpatients, an obvious alternative diagnosis, necrotizing infection, or sepsis. It does not replace the examination, an ultrasound for suspected clot, or a dermatology consult. Never withhold antibiotics from an unstable patient because of it.</p>
       <h3>Limits</h3>
-      <p>The reference standard was the coded discharge diagnosis, not expert adjudication. Discrimination was lowest at 70 years or older (0.70), where a mimic is most likely, so look twice at a rule-in in that group. No tier uses a culture result.</p>
+      <p>The reference standard was the coded discharge diagnosis, not expert adjudication. Discrimination was 0.70 at 70 years or older, the lowest of the age groups, where a mimic is most likely, so look twice at a rule-in in that group. No tier uses a culture result.</p>
       <h3 id="trained-h">Trained on</h3>
       <dl class="kv" aria-labelledby="trained-h">
-        <div><dt>Patients</dt><dd>24&nbsp;852 adults, one index admission each</dd></div>
+        <div><dt>Patients</dt><dd>13&nbsp;578 hospitalized adults, one index admission each (MIMIC-IV; the training and validation partitions with a processed discharge summary). The full cohort was 24&nbsp;852.</dd></div>
         <div><dt>Hospital</dt><dd>Beth Israel Deaconess, 2008 to 2022 (MIMIC-IV v3.1)</dd></div>
-        <div><dt>Cellulitis or erysipelas</dt><dd>47.4%</dd></div>
+        <div><dt>Cellulitis or erysipelas</dt><dd>47.4% of the full cohort of 24&nbsp;852</dd></div>
         <div><dt>Mimics</dt><dd>18 pseudocellulitis conditions, such as deep vein thrombosis, venous stasis, contact dermatitis, gout</dd></div>
-        <div><dt>Laterality</dt><dd>Read from 17&nbsp;024 discharge summaries by a language model on local hardware</dd></div>
+        <div><dt>Laterality</dt><dd>Read from 17&nbsp;024 discharge summaries (13&nbsp;578 used for fitting, 3&nbsp;446 for testing) by a language model on local hardware</dd></div>
       </dl>
 
     </div>
@@ -130,7 +130,7 @@ Arithmetic lives in js/model.js and is covered by tests/.
   </details>
 
   <h3>Cite</h3>
-  <p class="cite-text" id="citation">Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC, a tiered interpretable model to distinguish cellulitis from mimics in hospitalized adults. JAMA Dermatol. 2026; submitted. cellulitiscalc.com</p>
+  <p class="cite-text" id="citation">Wu E, Lee A, Youssef A, English J, Mason E, Xing EP, Pugliano-Mauro M. CELTIC: A Tiered Model to Distinguish Lower Extremity Cellulitis From Mimics in Hospitalized Adults. JAMA Dermatol. 2026; submitted. cellulitiscalc.com</p>
   <p class="cite-act"><button type="button" class="plain" id="copy-cite">Copy citation</button><span class="copied" id="copied" aria-live="polite"></span></p>
 </section>
 
